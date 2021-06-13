@@ -1,0 +1,6 @@
+if [ -n "$BASH_VERSION" ]; then
+    TIAGO_BASE_WS=/opt/tiago_public_ws/devel/setup.bash
+    if [ -f "$TIAGO_BASE_WS" ]; then
+        . "$TIAGO_BASE_WS"
+    fi
+fi

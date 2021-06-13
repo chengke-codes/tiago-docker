@@ -1,0 +1,2 @@
+#!/bin/bash
+TIAGO_USER=`whoami` TIAGO_UID=`id -u $TIAGO_USER` TIAGO_GID=`id -g $TIAGO_USER` docker-compose -f ${TIAGO_DOCKER_ROOT}/docker-compose.yml exec workspace bash -ic "bash; (exit 0)"

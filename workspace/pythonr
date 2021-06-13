@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Make sure that the profile was sourced, so that executing python
+# via ssh does the same as executing python locally.
+if [ -f "$HOME/.ros_profile" ]; then
+	. "$HOME/.ros_profile"
+fi
+
+# Get the directory of this script, see 
+# https://stackoverflow.com/a/53122736/2305095
+__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Execute the original python.
+${__dir}/python2.7 "$@"
