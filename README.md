@@ -2,7 +2,7 @@
 
 ROS Version: **Melodic**
 
-A docker-compose project with the latest TIAGO Public simulation http://wiki.ros.org/Robots/TIAGo/Tutorials/Installation/TiagoSimulation.
+A docker-compose project with the [TIAGO Public simulation](https://wiki.ros.org/Robots/TIAGo/Tutorials/Installation/InstallUbuntuAndROS).
 
 ## Prerequisites
 
