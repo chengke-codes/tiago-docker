@@ -1,0 +1,27 @@
+version: '3.5'
+services:
+  workspace:
+    build:
+        context: ./workspace
+        args:
+          - TIAGO_USER=${TIAGO_USER}
+    volumes:
+      - './tiago_home:${HOME}:rw'
+      - '${HOME}/.ssh:${HOME}/.ssh:rw'
+      - '/tmp/.X11-unix:/tmp/.X11-unix:rw'
+      - '/etc/localtime:/etc/localtime:ro'
+      - '/etc/passwd:/etc/passwd:ro'
+      - '/etc/group:/etc/group:ro'
+      - '/etc/shadow:/etc/shadow:ro'
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+      - TIAGO_USER=${TIAGO_USER}
+      - TIAGO_UID=${TIAGO_UID}
+      - TIAGO_GID=${TIAGO_GID}
+    tty: true
+    entrypoint: "/entrypoint.sh"
+    runtime: nvidia
+    working_dir: '${HOME}'
+    user: '${TIAGO_UID}:${TIAGO_GID}'
+    network_mode: "host"
