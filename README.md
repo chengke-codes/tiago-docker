@@ -71,17 +71,23 @@ Then run `source ~/.bashrc` to make the above changes take effect.
 
 4\. If you want to make changes with your ROS environment, you have to edit `.ros_profile` instead of `.bash_rc` in your container. This `.ros_profile` will be loaded by `.bashrc` and the remote python wrapper depends on it.
 
-## Working with PyCharm
+## Working with PyCharm/Gateway
 
-1\. Make sure your SSH public/private keys are ready.
+1. Make sure your SSH public/private keys are **ready**.
 
-2\. Use PyCharm to open your project and then create a remote Python interpreter. 
+2. Use PyCharm/Gateway to create an **remote** project through SSH. The username is the same as the one you are currently using. The Host is `127.0.0.1` and the Port is `2222`. 
 
-![Screenshot from 2021-06-13 12-39-44.jpg](https://i.loli.net/2021/06/13/IDM5Rf1CYGyh2iX.jpg)
+   ![image-20221024195509566](https://img.miyuko.xyz/i/2022/10/25/6356df8f31ff5.png)
 
-Python interpreter path should be `/usr/bin/pythonr`
+3. Select your preferred IDE version and the location of your project.
 
-3\. Now you have code hints and auto complete.
+4. Go to `Preferences | Project | Python Interpreter` and make sure you are using the correct **System Python Interpreter** with path `/usr/bin/pythonr`. Once you selected the correct interpreter, you should be able see installed ROS packages.
+
+   ![image-20221024195717624](https://img.miyuko.xyz/i/2022/10/25/6356e00ea1993.png)
+
+   ![image-20221024195810950](https://img.miyuko.xyz/i/2022/10/25/6356e043827ab.png)
+
+5. Now you have code hints and auto complete.
 
 ## References
 
