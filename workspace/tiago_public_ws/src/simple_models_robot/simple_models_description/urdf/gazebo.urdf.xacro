@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+
+  Copyright (c) 2011, PAL Robotics, S.L.
+  All rights reserved.
+
+  This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License.
+  To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-nd/3.0/ or send a letter to
+  Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
+-->
+
+<robot name="tiago" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <gazebo>
+    <plugin name="gazebo_diff_drive_plugin" filename="libgazebo_diff_drive_plugin.so">
+    <legacyMode>false</legacyMode>
+    <alwaysOn>true</alwaysOn>
+    <updateRate>20</updateRate>
+    <wheelSeparation>0.4044</wheelSeparation>
+    <wheelDiameter>0.197</wheelDiameter>
+    <torque>6</torque>
+    <xacro:if value="${is_multiple}">
+      <robotNamespace>/${nsp}</robotNamespace>
+      <commandTopic>/${nsp}/mobile_base_controller/cmd_vel</commandTopic>
+    </xacro:if>
+    <xacro:unless value="${is_multiple}">
+      <robotNamespace>/</robotNamespace>
+      <commandTopic>/mobile_base_controller/cmd_vel</commandTopic>
+    </xacro:unless>
+    <odometryTopic>mobile_base_controller/odom</odometryTopic>
+    <odometryFrame>odom</odometryFrame>
+    <robotBaseFrame>base_link</robotBaseFrame>
+    <odometrySource>0</odometrySource>
+    </plugin>
+  </gazebo>
+
+</robot>

@@ -1,0 +1,7 @@
+enable_safety: false
+allow_recovery: false
+max_collision_impulse_estimate: 1.0
+max_distance_impulse: 100.0
+anticipation_time: 0.0
+drift_velocity_bound: 0.0
+drift_duration_bound: 0.0

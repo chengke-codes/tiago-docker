@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <link name="base_link">
+        <inertial>
+            <mass value="1.0"/>
+            <inertia ixx="1.0" ixy="0" ixz="0" iyy="1.0" iyz="0" izz="1.0"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </inertial>
+    </link>
+
+    <joint name="arm_1_joint" type="revolute">
+        <parent link="base_link"/>
+        <child link="arm_1_link"/>
+        <origin rpy="1.57079632679490 0 -1.57079632679490" xyz="1.0 0 1.0"/>
+        <!--
+        <origin rpy="1.57079632679490 0 -1.57079632679490" xyz="0 0 0.971"/>
+        <origin rpy="1.57079632679490 0 -1.57079632679490" xyz="1.0 0 1.0"/>
+        <origin rpy="0 0 0" xyz="0 0 1.1"/>
+        -->
+        <limit effort="100.0" lower="-3.14" upper="3.14" velocity="100.0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="arm_1_link">
+        <inertial>
+            <mass value="2.0"/>
+            <inertia ixx="10.0" ixy="0" ixz="0" iyy="10.0" iyz="0" izz="10.0"/>
+            <origin rpy="0 0 0" xyz="0 0 5"/>
+        </inertial>
+    </link>
+
+    <joint name="arm_2_joint" type="revolute">
+        <parent link="arm_1_link"/>
+        <child link="arm_2_link"/>
+        <origin rpy="3.14159265358979 0 3.14159265358979" xyz="10.01 0 10.01"/>
+        <!--
+        <origin rpy="3.141593 0 0" xyz="-0.05 0.075 0.021"/>
+        <origin rpy="3.14159265358979 0 3.14159265358979" xyz="10.01 0 10.01"/>
+        <origin rpy="0 0 0" xyz="0 0 10.01"/>
+        -->
+        <limit effort="100.0" lower="-3.14" upper="3.14" velocity="100.0"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="arm_2_link">
+        <inertial>
+            <mass value="3.0"/>
+            <inertia ixx="100.0" ixy="0" ixz="0" iyy="100.0" iyz="0" izz="100.0"/>
+            <origin rpy="0 0 0" xyz="0 0 50"/>
+        </inertial>
+    </link>
+
+    <joint name="arm_3_joint" type="revolute">
+        <parent link="arm_1_link"/>
+        <child link="arm_3_link"/>
+        <origin rpy="3.14159265358979 0 3.14159265358979" xyz="100.001 0 100.001"/>
+        <!--
+        <origin rpy="3.14159265358979 0 0" xyz="0 0 100.001"/>
+        <origin rpy="3.141593 0 3.141593" xyz="0 -0.25 0.07"/>
+        <origin rpy="3.14159265358979 0 3.14159265358979" xyz="0 -0.25 0.07"/>
+        <origin rpy="3.14159265358979 0 3.14159265358979" xyz="100.001 0 100.001"/>
+        <origin rpy="0 0 0" xyz="0 0 100.001"/>
+        -->
+        <limit effort="100.0" lower="-3.14" upper="3.14" velocity="100.0"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="arm_3_link">
+        <inertial>
+            <mass value="4.0"/>
+            <inertia ixx="1000.0" ixy="0" ixz="0" iyy="1000.0" iyz="0" izz="1000.0"/>
+            <origin rpy="0 0 0" xyz="0 0 500"/>
+        </inertial>
+    </link>
+
+</robot>
+

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>tiago_2dnav</name>
+  <version>2.1.0</version>
+  <description>TiaGo-specific launch files needed to run
+    navigation on the TiaGo robot.</description>
+  <maintainer email="jeremie.deray@pal-robotics.com">Jeremie Deray</maintainer>
+  <maintainer email="procopio.stein@pal-robotics.com">Procopio Stein</maintainer>
+  <license>Apache License 2.0</license>
+  <author email="enrique.fernandez@pal-robotics.com">Enrique Fernandez</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>tiago_laser_sensors</exec_depend>
+  <exec_depend>tiago_maps</exec_depend>
+  <exec_depend>pal_navigation_cfg_tiago</exec_depend>
+  <exec_depend>trajectory_msgs</exec_depend>
+  <exec_depend>pal_startup_msgs</exec_depend>
+  <exec_depend>pal_common_msgs</exec_depend>
+</package>

@@ -1,6 +1,7 @@
 version: '3.5'
 services:
   workspace:
+    image: nozomi-sk/tiago-docker:kinetic
     build:
         context: ./workspace
         args:

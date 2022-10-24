@@ -1,0 +1,8 @@
+<launch>
+  <rosparam command="load" ns="test_ok"
+                           file="$(find actuator_state_controller)/test/actuator_state_controller_ok.yaml" />
+  <rosparam command="load" ns="test_ko"
+                           file="$(find actuator_state_controller)/test/actuator_state_controller_ko.yaml" />
+
+  <test test-name="actuator_state_controller_test" pkg="actuator_state_controller" type="actuator_state_controller_test"/>
+</launch>

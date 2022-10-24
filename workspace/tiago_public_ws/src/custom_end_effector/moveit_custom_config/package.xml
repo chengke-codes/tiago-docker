@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>moveit_custom_config</name>
+  <version>0.1.1</version>
+  <description>The moveit_custom_config package</description>
+
+  <maintainer email="david.fernandez@pal-robotics.com">davidfernandez</maintainer>
+  <maintainer email="tiago_support@pal-robotics.com">TIAGo PAL support team</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>custom_ee_description</exec_depend>
+
+</package>

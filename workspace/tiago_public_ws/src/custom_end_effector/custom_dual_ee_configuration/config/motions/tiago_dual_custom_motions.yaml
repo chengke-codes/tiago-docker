@@ -1,0 +1,9 @@
+# play_motion:
+#   # TODO: Add your own motions using your own end effector
+#   controllers: [CONTROLLER_NAME]
+#   motions:
+#     MOTION_NAME:
+#       joints: []
+#       points:
+#       - positions: []
+#         time_from_start: 0

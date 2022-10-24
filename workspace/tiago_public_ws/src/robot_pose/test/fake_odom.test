@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="rosbag" type="play" name="player" output="screen" args="$(find robot_pose)/test/ground_truth_odom.bag -l"/> 
+  <include file="$(find robot_pose)/launch/fake_odom.launch"/>
+  <test test-name="fake_odom_test" pkg="robot_pose" type="fake_odom-test" time-limit="30.0"/>
+</launch>

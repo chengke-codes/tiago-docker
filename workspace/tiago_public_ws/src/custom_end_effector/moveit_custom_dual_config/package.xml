@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>moveit_custom_dual_config</name>
+  <version>0.1.1</version>
+  <description>The moveit_custom_dual_config package</description>
+
+  <author email="daniel.lopez@pal-robotics.com">Daniel Lopez</author>
+  <author email="david.fernandez@pal-robotics.com">davidfernandez</author>
+  <maintainer email="daniel.lopez@pal-robotics.com">Daniel Lopez</maintainer>
+  <maintainer email="tiago_support@pal-robotics.com">TIAGo PAL support team</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>custom_dual_ee_description</exec_depend>
+
+</package>

@@ -1,0 +1,7 @@
+<library path="lib/libactuator_state_controller">
+  <class name="actuator_state_controller/ActuatorStateController" type="actuator_state_controller::ActuatorStateController" base_class_type="controller_interface::ControllerBase">
+  <description>
+    The actuator state controller publishes the current actuator state as a sensor_msgs/JointState message. The actuator state controller expects a ActuatorStateInterface type of hardware interface.
+  </description>
+  </class>
+</library>

@@ -1,0 +1,8 @@
+inertia_compensation_gain: 0.0
+motor_inertia: 0.00018533                                                      
+acceleration_differentiator_order: 5
+acceleration_filter_order: 5                                         
+acceleration_filter_cutoff: 100.0
+static_friction_gain: 0.
+viscous_friction_gain: 0.
+global_friction_gain: 0.95

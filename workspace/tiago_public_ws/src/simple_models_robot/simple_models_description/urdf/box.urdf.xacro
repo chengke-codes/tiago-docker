@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="1.0 1.0 1.0"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <geometry>
+        <box size="1.0 1.0 1.0"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </collision>
+    
+    <inertial>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        <mass value="50" />
+         <inertia ixx="0.1"  ixy="0"  ixz="0" iyy="0.1" iyz="0" izz="0.1" />
+    </inertial>
+    
+    <rbdl_contact>
+       <point value="0.5 0.5 -0.5"/>    
+       <point value="0.5 -0.5 -0.5"/>    
+       <point value="-0.5 0.5 -0.5"/>    
+       <point value="-0.5 -0.5 -0.5"/>
+       <point value="0.5 0.5 0.5"/>    
+       <point value="0.5 -0.5 0.5"/>    
+       <point value="-0.5 0.5 0.5"/>    
+       <point value="-0.5 -0.5 0.5"/>  
+    </rbdl_contact>
+ 
+ </link>
+
+  <link name="box_link">
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="0.04287677484" ixy="0.00043705397" ixz="0.00078292368" iyy="0.03598906971" iyz="0.00037717694" izz="0.01364791564" />
+      <origin rpy="0 0 0" xyz="0.0 0.0 -0.5"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.1" radius="0.00005"/>
+      </geometry>
+      <material name="LightGrey" />
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.2" radius="0.00005"/>
+      </geometry>
+      <material name="White" />
+    </collision>
+  </link>
+  <joint name="box_joint" type="prismatic">
+    <parent link="base_link"/>
+    <child link="box_link"/>
+    <origin xyz="0.0 0.0 0.0"
+            rpy="0.0 0.0 0.0"/>
+    <axis xyz="0 0 1" />
+
+    <limit lower="0" upper="0.2" effort="100.0" velocity="100.0" />
+    <dynamics friction="1.0" damping="1.0"/>
+  </joint>
+
+  <transmission name="box_joint_trans">
+     <type>transmission_interface/SimpleTransmission</type>
+     <actuator name="box_motor" >
+       <mechanicalReduction> 1.0 </mechanicalReduction>
+     </actuator>
+     <joint name="box_joint">
+       <offset>0.0</offset>
+       <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+       <hardwareInterface>hardware_interface/JointStateInterface</hardwareInterface>
+     </joint>
+  </transmission>
+
+</robot>

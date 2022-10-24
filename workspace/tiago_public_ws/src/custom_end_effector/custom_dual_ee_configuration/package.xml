@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>custom_dual_ee_configuration</name>
+  <version>0.1.1</version>
+  <description>The custom_dual_ee_configuration package</description>
+  
+  <author email="david.fernandez@pal-robotics.com">davidfernandez</author>
+  <author email="daniel.lopez@pal-robotics.com">Daniel Lopez</author>
+  <maintainer email="daniel.lopez@pal-robotics.com">Daniel Lopez</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>custom_dual_ee_description</exec_depend>
+</package>

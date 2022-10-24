@@ -1,0 +1,17 @@
+<launch>
+  <arg name="controller_ns"                 value="actuator_state_controller"/>
+  <arg name="topic_name"                    default="actuator_states"/>
+  <arg name="publish_absolute_position"     default="true"/>
+  <arg name="publish_torque"                default="true"/>
+
+  <!-- load configuration -->
+  <rosparam command="load" file="$(find actuator_state_controller)/actuator_state_controller.yaml" />
+  <rosparam ns="$(arg controller_ns)" subst_value="True">
+    topic_name: $(arg topic_name)
+    publish_absolute_position: $(arg publish_absolute_position)
+    publish_torque: $(arg publish_torque)
+  </rosparam>
+
+  <!-- spawn controller -->
+  <node name="actuator_state_controller_spawner" pkg="controller_manager" type="spawner" output="screen" args="$(arg controller_ns)" />
+</launch>

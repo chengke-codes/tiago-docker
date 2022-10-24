@@ -46,13 +46,13 @@ RUN chmod 777 /usr/bin/pythonr
 
 RUN mkdir -p /opt/tiago_public_ws
 WORKDIR /opt/tiago_public_ws
-RUN wget https://raw.githubusercontent.com/pal-robotics/tiago_tutorials/kinetic-devel/tiago_public.rosinstall
-RUN rosinstall src /opt/ros/kinetic tiago_public.rosinstall
+COPY tiago_public_ws /opt/tiago_public_ws
+
 RUN rm -f /etc/ros/rosdep/sources.list.d/20-default.list
 RUN rosdep init
 RUN rosdep update --include-eol-distros
 RUN rosdep install --from-paths src --ignore-src --rosdistro kinetic --skip-keys="opencv2 opencv2-nonfree pal_laser_filters speed_limit_node sensor_to_cloud hokuyo_node libdw-dev python-graphitesend-pip python-statsd pal_filters pal_vo_server pal_usb_utils pal_pcl pal_pcl_points_throttle_and_filter pal_karto pal_local_joint_control camera_calibration_files pal_startup_msgs pal-orbbec-openni2 dummy_actuators_manager pal_local_planner gravity_compensation_controller current_limit_controller dynamic_footprint dynamixel_cpp tf_lookup opencv3 joint_impedance_trajectory_controller urdf_test uvc_camera range_sensor_layer teb_local_planner pointcloud_to_laserscan octomap_server spatio_temporal_voxel_layer openni2_launch moveit_ros_visualization slam_toolbox sick_tim libuvc_camera mynteye_description stockbot_description" -y
 
-RUN apt-get install ros-kinetic-catkin python-catkin-tools -y
+RUN apt-get install ros-kinetic-teb-local-planner ros-kinetic-range-sensor-layer ros-kinetic-pointcloud-to-laserscan ros-kinetic-catkin python-catkin-tools -y
 
 RUN source /opt/ros/kinetic/setup.bash; catkin build -DCATKIN_ENABLE_TESTING=0

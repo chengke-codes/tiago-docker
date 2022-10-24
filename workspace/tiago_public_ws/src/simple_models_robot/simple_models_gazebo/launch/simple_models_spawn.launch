@@ -1,0 +1,24 @@
+<launch>
+  <arg name="gzpose"             default="-x 0 -y 0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
+  <arg name="laser_model"/>
+  <arg name="robot"              default="simple_pmb2"/>
+  <arg name="model_name"         default="pmb2"/>
+  <arg name="multi"              default=""/>
+  <arg name="camera_model"       default="structure"/>
+
+  <param name="pal_robot_info/type" type="str" value="$(arg model_name)"/>
+
+  <!-- Robot model -->
+  <include file="$(find simple_models_description)/robots/upload.launch">
+    <arg name="laser_model" value="$(arg laser_model)"/>
+    <arg name="robot" value="$(arg robot)"/>
+    <arg name="multi" value="$(arg multi)"/>
+    <arg name="model_name"  value="$(arg model_name)"/>
+    <arg name="camera_model" value="$(arg camera_model)"/>
+  </include>
+
+  <!-- Spawn robot in Gazebo -->
+  <node pkg="gazebo_ros" type="spawn_model" name="$(anon spawn_model)"
+    args="-urdf -param robot_description $(arg gzpose) -model $(arg model_name)" />
+
+</launch>

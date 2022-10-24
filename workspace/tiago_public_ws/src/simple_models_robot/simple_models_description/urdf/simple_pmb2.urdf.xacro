@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:property name="radius" value="0.27"/>
+  <xacro:property name="small_radius" value="0.22"/>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.21" radius="${radius}"/>
+      </geometry>
+      <origin rpy="0 0 0.18" xyz="0 0 0"/>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <geometry>
+        <cylinder length="0.21" radius="${radius}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </collision>
+    
+    <inertial>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        <mass value="50" />
+         <inertia ixx="0.1"  ixy="0"  ixz="0" iyy="0.1" iyz="0" izz="0.1" />
+    </inertial>
+  </link>
+
+  <gazebo reference="base_link">
+    <material>Gazebo/White</material>
+    <kp>100000000.0</kp>
+    <kd>10.0</kd>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <fdir1>1 0 0</fdir1>
+    <maxVel>10.0</maxVel>
+    <minDepth>0.0005</minDepth>
+    <laserRetro>0</laserRetro>
+  </gazebo>
+
+  <link name="base_footprint">
+    <visual>
+      <geometry>
+        <cylinder length="0.08" radius="${radius}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <geometry>
+        <cylinder length="0.08" radius="${radius}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </collision>
+    
+    <inertial>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        <mass value="50" />
+         <inertia ixx="0.1"  ixy="0"  ixz="0" iyy="0.1" iyz="0" izz="0.1" />
+    </inertial>
+  </link>
+
+  <gazebo reference="base_footprint">
+    <material>Gazebo/White</material>
+    <kp>100000000.0</kp>
+    <kd>10.0</kd>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <fdir1>1 0 0</fdir1>
+    <maxVel>10.0</maxVel>
+    <minDepth>0.0005</minDepth>
+    <laserRetro>0</laserRetro>
+  </gazebo>
+
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 -0.17" rpy="0 0 0" />
+    <child link="base_footprint" />
+    <parent link="base_link"/>
+  </joint>
+
+  <link name="base_mid">
+    <visual>
+      <geometry>
+        <cylinder length="0.03" radius="${small_radius}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    
+    <collision>
+      <geometry>
+        <cylinder length="0.03" radius="${small_radius}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </collision>
+    
+    <inertial>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        <mass value="50" />
+         <inertia ixx="0.1"  ixy="0"  ixz="0" iyy="0.1" iyz="0" izz="0.1" />
+    </inertial>
+  </link>
+
+  <gazebo reference="base_mid">
+    <material>Gazebo/White</material>
+    <kp>100000000.0</kp>
+    <kd>10.0</kd>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <fdir1>1 0 0</fdir1>
+    <maxVel>10.0</maxVel>
+    <minDepth>0.0005</minDepth>
+    <laserRetro>0</laserRetro>
+  </gazebo>
+
+  <joint name="base_mid_joint" type="fixed">
+    <origin xyz="-0.05 0 0.05" rpy="0 0 0" />
+    <child link="base_mid" />
+    <parent link="base_footprint"/>
+  </joint>
+
+</robot>
+
+ 
+

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+
+   <test test-name="joint_trajectory_controller_adapter_test" pkg="joint_trajectory_controller" type="joint_trajectory_controller_adapter_test" time-limit="100.0"/>
+
+</launch>

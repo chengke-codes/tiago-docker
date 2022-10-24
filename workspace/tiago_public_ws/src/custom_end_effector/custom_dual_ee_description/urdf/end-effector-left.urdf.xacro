@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+
+  Copyright (c) 2021, PAL Robotics, S.L.
+  All rights reserved.
+
+  This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License.
+  To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-nd/3.0/ or send a letter to
+  Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
+-->
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!--
+    This macro will be invoked by the tiago_description package
+
+    Parameters:
+    - parent: Parent link
+    
+    Child Nodes:
+    - origin: Origin of the joint connection parent with the next link, as an origin tag
+  -->
+  <xacro:macro name="end_effector_left" params="parent *origin">
+    <!-- TODO: Include the URDF of your custom left end effector, as well as any controllers or gazebo plugins needed here. -->
+    <!-- Example link and Joint -->
+    <link name="cee_left_tool_link">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="0.0001" />
+        <inertia ixx="0.00001" ixy="0.0" ixz="0.0"
+                 iyy="0.00001" iyz="0.0"
+                 izz="0.00001" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 -0.025" rpy="0 0 0" />
+        <geometry>
+          <cylinder length="0.07" radius="0.015"/>
+        </geometry>
+        <material name="ee_material">
+          <color rgba="0 0 0 1"/>
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 -0.025" rpy="0 0 0" />
+        <geometry>
+          <cylinder length="0.07" radius="0.015"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="cee_left_tool_joint" type="fixed">
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent}" />
+      <child link="cee_left_tool_link" />
+      <axis xyz="0 0 0" />
+    </joint>
+
+  </xacro:macro>
+</robot>

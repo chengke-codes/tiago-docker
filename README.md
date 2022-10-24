@@ -16,9 +16,9 @@ Nvidia docker https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/
 
 For the NVIDIA option this has been tested on the following systems using NVIDIA docker2:
 
-| Ubuntu distribution | Linux Kernel     | Nvidia drivers            |
-| ------------------- | ---------------- | ------------------------- |
-| 20.04               | 5.4.0<br />5.8.0 | nvidia-driver-460 (works) |
+| Ubuntu distribution | Linux Kernel                 | Nvidia drivers |
+| ------------------- | ---------------------------- | -------------- |
+| 20.04               | 5.4.0<br />5.8.0<br />5.15.0 | 460<br />470   |
 
 ## How to install
 

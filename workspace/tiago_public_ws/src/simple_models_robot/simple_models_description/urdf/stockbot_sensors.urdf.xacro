@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find stockbot_description)/urdf/sensors/sick_tim571_laser.urdf.xacro"/>
+  <xacro:include filename="$(find stockbot_description)/urdf/sensors/imu.urdf.xacro"/>
+  <xacro:include filename="$(find stockbot_description)/urdf/sensors/elp_rgb.urdf.xacro"/>
+  <xacro:include filename="$(find stockbot_description)/urdf/sensors/structure_sensor.urdf.xacro"/>
+  <xacro:include filename="$(find mynteye_description)/urdf/mynt_eye_d.urdf.xacro"/>
+  <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
+  <xacro:include filename="$(find stockbot_description)/urdf/base/base_stockbot_calib.urdf.xacro"/>
+  <xacro:include filename="$(find stockbot_description)/urdf/base/base_stockbot_default.urdf.xacro"/>
+
+  <xacro:macro name="base_sensors" params="name laser_model:=false">
+    <xacro:property name="mesh_scale"  value="0.001"/>
+    <xacro:property name="parent"      value="base"/>
+
+    <!-- Base -->
+<!--     <link name="${parent}_link">
+      <inertial>
+        <origin xyz="-0.00381 0.00312 0.43029" rpy="0 0 0" />
+        <mass value="64.24132" />
+        <inertia ixx="11.896358" ixy="0.001117" ixz="-0.200645"
+                 iyy="11.897509" iyz="0.11063"
+                 izz="0.796967"/>
+      </inertial>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://stockbot_description/meshes/base/base_and_cover.stl"
+            scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
+        </geometry>
+        <material name="DarkGrey" />
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://stockbot_description/meshes/base/base_and_cover.stl"
+            scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
+        </geometry>
+        <material name="DarkGrey" />
+      </collision>
+    </link> -->
+
+    <!-- Base footprint -->
+<!--     <link name="${parent}_footprint"/>
+    <joint name="${parent}_footprint_joint" type="fixed">
+      <origin xyz="0 0 ${base_link_z}" rpy="0 0 0" />
+      <child link="${parent}_link" />
+      <parent link="${parent}_footprint"/>
+    </joint> -->
+
+    <!-- Laser -->
+    <xacro:sick_tim571_laser
+      name="${parent}_laser"
+      parent="${parent}"
+      ros_topic="scan_raw"
+      update_rate="15"
+      min_angle="${-135 * deg_to_rad}"
+      max_angle="${135 * deg_to_rad}" >
+      <origin 
+        xyz="${base_laser_x}
+             ${base_laser_y} 
+             ${base_laser_z}" 
+        rpy="${180 * deg_to_rad} 0 0" />
+    </xacro:sick_tim571_laser>
+
+    <!-- Check which camera model to use -->
+  <xacro:if value="${camera_model == 'structure'}">
+    <!-- Depth "base" -->
+    <xacro:structure_sensor
+      name="base_rgbd_camera"
+      parent="${parent}">
+      <origin
+        xyz="${base_rgbd_x}
+             ${base_rgbd_y}
+             ${base_rgbd_z}"
+        rpy="${base_rgbd_R * deg_to_rad}
+             ${base_rgbd_P * deg_to_rad}
+             ${base_rgbd_Y * deg_to_rad}"/>
+    </xacro:structure_sensor>
+
+    <!-- Depth "roof" -->
+    <xacro:structure_sensor
+      name="roof_rgbd_camera"
+      parent="${parent}">
+      <origin
+        xyz="${roof_rgbd_x}
+             ${roof_rgbd_y}
+             ${roof_rgbd_z}"
+        rpy="${roof_rgbd_R * deg_to_rad}
+             ${roof_rgbd_P * deg_to_rad}
+             ${roof_rgbd_Y * deg_to_rad}"/>
+    </xacro:structure_sensor>
+
+    <!-- RGB -->
+    <xacro:elp_rgb 
+      name="rgb_camera" 
+      parent="${parent}">
+      <origin 
+        xyz="${rgb_x}
+             ${rgb_y}
+             ${rgb_z}" 
+        rpy="${rgb_R * deg_to_rad}
+             ${rgb_P * deg_to_rad}
+             ${rgb_Y * deg_to_rad}"/>
+    </xacro:elp_rgb>  
+  </xacro:if>
+
+  <xacro:if value="${camera_model == 'mynt_eye_d'}">
+    <!-- RGBD -->
+    <xacro:mynteye_d_camera
+      name="base_rgbd_camera" 
+      parent="${parent}">
+      <origin 
+        xyz="${base_rgbd_x}
+             ${base_rgbd_y}
+             ${base_rgbd_z}" 
+        rpy="${base_rgbd_R * deg_to_rad}
+             ${base_rgbd_P * deg_to_rad}
+             ${base_rgbd_Y * deg_to_rad}"/>
+    </xacro:mynteye_d_camera>
+
+    <xacro:mynteye_d_camera
+      name="roof_rgbd_camera"
+      parent="${parent}">
+      <origin
+        xyz="${roof_rgbd_x}
+             ${roof_rgbd_y}
+             ${roof_rgbd_z}"
+        rpy="${roof_rgbd_R * deg_to_rad}
+             ${roof_rgbd_P * deg_to_rad}
+             ${roof_rgbd_Y * deg_to_rad}"/>
+    </xacro:mynteye_d_camera>
+  </xacro:if>
+
+  <xacro:if value="${camera_model == 'realsense'}">
+    <!-- RGBD -->
+    <xacro:sensor_d435
+      name="base_rgbd_camera" 
+      parent="${parent}_link"
+      topics_ns="base_rgbd_camera">
+      <origin 
+        xyz="${base_rgbd_x}
+             ${base_rgbd_y}
+             ${base_rgbd_z}" 
+        rpy="${base_rgbd_R * deg_to_rad}
+             ${base_rgbd_P * deg_to_rad}
+             ${base_rgbd_Y * deg_to_rad}"/>
+    </xacro:sensor_d435>
+
+    <xacro:sensor_d435
+      name="roof_rgbd_camera"
+      parent="${parent}_link"
+      topics_ns="roof_rgbd_camera">
+      <origin
+        xyz="${roof_rgbd_x}
+             ${roof_rgbd_y}
+             ${roof_rgbd_z}"
+        rpy="${roof_rgbd_R * deg_to_rad}
+             ${roof_rgbd_P * deg_to_rad}
+             ${roof_rgbd_Y * deg_to_rad}"/>
+    </xacro:sensor_d435>
+  </xacro:if>
+
+    <!-- IMU -->
+    <xacro:imu_sensor
+      name="base_imu"
+      parent="${parent}_link"
+      update_rate="100.0">
+      <origin
+        xyz="${imu_x}
+             ${imu_y}
+             ${imu_z}" 
+        rpy="${imu_R * deg_to_rad}
+             ${imu_P * deg_to_rad}
+             ${imu_Y * deg_to_rad}"/>
+    </xacro:imu_sensor>
+  </xacro:macro>
+
+</robot>

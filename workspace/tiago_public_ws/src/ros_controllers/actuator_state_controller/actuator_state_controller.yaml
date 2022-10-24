@@ -1,0 +1,3 @@
+actuator_state_controller:
+  type: actuator_state_controller/ActuatorStateController
+  publish_rate: 50
