@@ -35,6 +35,7 @@ RUN echo "${TIAGO_USER} ALL=(ALL) NOPASSWD:ALL" | EDITOR="tee -a" visudo
 RUN apt-get update
 RUN apt-get install wget vim openssh-server -y
 COPY sshd_config /etc/ssh/
+RUN chmod 644 /etc/ssh/sshd_config
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 777 /entrypoint.sh
 
