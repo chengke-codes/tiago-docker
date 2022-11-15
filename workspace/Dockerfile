@@ -34,8 +34,7 @@ RUN echo "${TIAGO_USER} ALL=(ALL) NOPASSWD:ALL" | EDITOR="tee -a" visudo
 
 RUN apt-get update
 RUN apt-get install wget vim openssh-server -y
-
-RUN sed -i "s/Port 22/Port 2222/" /etc/ssh/sshd_config
+COPY sshd_config /etc/ssh/
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 777 /entrypoint.sh
 
@@ -58,3 +57,10 @@ RUN apt-get install ros-kinetic-teb-local-planner ros-kinetic-range-sensor-layer
 RUN pip install pip==20.3.4
 
 RUN source /opt/ros/kinetic/setup.bash; catkin build -DCATKIN_ENABLE_TESTING=0
+
+RUN pip install cryptography~=3.3.2 pyOpenSSL~=21.0.0
+
+RUN apt-get install software-properties-common -y
+RUN apt-add-repository ppa:git-core/ppa -y
+RUN apt-get update
+RUN apt-get install vlc git -y
