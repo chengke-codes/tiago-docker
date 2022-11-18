@@ -1,2 +1,27 @@
 #!/bin/bash
-TIAGO_USER=`whoami` TIAGO_UID=`id -u $TIAGO_USER` TIAGO_GID=`id -g $TIAGO_USER` docker-compose -f ${TIAGO_DOCKER_ROOT}/docker-compose.yml up -d workspace
+
+
+if [[ -n "${DISPLAY}" ]] ; then
+
+  if ! [ -x "$(command -v pactl)" ]; then
+    echo 'Error: pactl is not installed.' >&2
+    exit 1
+  fi
+
+  socket_path="/tmp/tiago-kinetic-pulseaudio.socket"
+  if [[ ! -S "${socket_path}" ]]; then
+      rm -rf "${socket_path}"
+      pactl load-module module-native-protocol-unix socket="${socket_path}"
+      pactl_result=$?
+      if [ $pactl_result -ne 0 ]; then
+          echo "Error: pactl load-module failed" >&2
+          exit $pactl_result
+      fi
+  fi
+  TIAGO_USER=$(whoami) TIAGO_UID=$(id -u "$TIAGO_USER") TIAGO_GID=$(id -g "$TIAGO_USER") docker-compose -f "${TIAGO_DOCKER_ROOT}"/docker-compose.yml up -d workspace
+else
+  echo "Error: GUI Disabled" >&2
+  exit 1
+fi
+
+

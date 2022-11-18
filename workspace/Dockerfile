@@ -39,6 +39,8 @@ RUN chmod 644 /etc/ssh/sshd_config
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 777 /entrypoint.sh
 
+RUN mkdir -p /etc/pulse
+COPY pulseaudio.client.conf /etc/pulse/client.conf
 
 COPY pythonr /usr/bin/pythonr
 RUN chown root.root /usr/bin/pythonr

@@ -14,7 +14,10 @@ services:
       - '/etc/passwd:/etc/passwd:ro'
       - '/etc/group:/etc/group:ro'
       - '/etc/shadow:/etc/shadow:ro'
+      - '/tmp/tiago-kinetic-pulseaudio.socket:/tmp/pulseaudio.socket'
     environment:
+      - PULSE_SERVER=unix:/tmp/pulseaudio.socket
+      - PULSE_COOKIE=/tmp/pulseaudio.cookie
       - DISPLAY
       - QT_X11_NO_MITSHM=1
       - TIAGO_USER=${TIAGO_USER}
@@ -26,3 +29,5 @@ services:
     working_dir: '${HOME}'
     user: '${TIAGO_UID}:${TIAGO_GID}'
     network_mode: "host"
+    cap_add:
+      - SYS_NICE
