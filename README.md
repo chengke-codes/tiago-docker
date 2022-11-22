@@ -75,7 +75,7 @@ For the NVIDIA option this has been tested on the following systems using NVIDIA
 
 2. Use PyCharm/Gateway to create an **remote** project through SSH. The username is the same as the one you are currently using. The Host is `127.0.0.1` and the Port is `2222`. 
 
-![image-20221024195509566](https://img.miyuko.xyz/i/2022/10/25/6356df8f31ff5.png)
+   ![image-20221024195509566](https://img.miyuko.xyz/i/2022/10/25/6356df8f31ff5.png)
 
 3. Select your preferred IDE version and the location of your project.
 
